@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vikas Bhi, Virasat Bhi — Home</title>
+  <meta name="description"
+    content="Vikas Bhi, Virasat Bhi — an interactive showcase balancing development and heritage.">
+  <link rel="icon" type="image/png" href="assets/images/inpng.png">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP + ScrollTrigger (required for counters & some animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  <!-- Main script (contains canvas background, counters, interactions) -->
+  <script src="script.js" defer></script>
+
+  <!-- Inline minimal canvas styling so background shows behind everything immediately -->
+
+</head>
+
+<body>
+  <!-- Full-page animated background (canvas) -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><img src="assets/images/inpng.png" width="35px" height="35px"
+          alt="India Flag"></div>
+      <div>
+        <div style="font-weight:800">Vikas Bhi, Virasat Bhi</div>
+        <div style="font-size:12px;color:var(--muted)">Proud Roots, Powerful Legacy.</div>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <a href="index.html" data-transition>Home</a>
+      <a href="heritage.html" data-transition>Virasat</a>
+      <a href="vikas.html" data-transition>Vikas</a>
+      <a href="harmony.html" data-transition>Harmony</a>
+      <a href="involve.html" data-transition>Get Involved</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <!-- HERO: wrapper required for canvas background -->
+    <section class="hero-wrapper card" aria-labelledby="hero-heading">
+      <!-- Canvas for hero used site-wide now; kept wrapper for layout compatibility -->
+      <div class="hero">
+        <div class="intro" id="hero-heading">
+          <h1>India — <span style="color:var(--accent-heritage)">Virasat</span> · <span
+              style="color:var(--accent-dev)">Vikas</span></h1>
+          <p class="lead">An interactive exploration of how India preserves its heritage while pursuing modern
+            development.</p>
+
+          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+            <a class="btn btn-heritage" href="heritage.html" data-transition>Explore Virasat</a>
+            <a class="btn btn-dev" href="vikas.html" data-transition>See Vikas</a>
+          </div>
+
+          <!-- Impact stats (unchanged) -->
+          <div class="impact-stats" aria-hidden="false" style="margin-top:22px">
+            <div class="stat" aria-label="GDP growth">
+              <div class="num" data-target="8">0</div>
+              <div class="label">Estimated GDP Growth (%)</div>
+              <div class="caption">Recent annual growth figure (approx.)</div>
+            </div>
+
+            <div class="stat" aria-label="Heritage sites">
+              <div class="num" data-target="5000">0</div>
+              <div class="label">Heritage Sites Preserved</div>
+              <div class="caption">Sites recognised & protected across India</div>
+            </div>
+
+            <div class="stat" aria-label="Smart cities">
+              <div class="num" data-target="120">0</div>
+              <div class="label">Smart City Projects</div>
+              <div class="caption">Ongoing/upgraded urban development projects</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right-side preview cards -->
+        <div class="card split" aria-hidden="true">
+          <div class="half" style="background:linear-gradient(180deg, rgba(199,108,32,0.06), transparent)">
+            <h3 style="color:var(--accent-heritage);margin:0">Virasat</h3>
+            <img src="https://wallpapercave.com/wp/wp7231656.jpg" alt="Heritage preview">
+          </div>
+
+          <div class="half" style="background:linear-gradient(180deg, rgba(14,165,164,0.05), transparent)">
+            <h3 style="color:var(--accent-dev);margin:0">Vikas</h3>
+            <img src="https://wallpaperaccess.com/full/3517547.jpg" alt="Development preview">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Minimal intro section: purpose statement -->
+    <section class="card" style="margin-top:18px">
+      <h2 style="margin:0 0 8px">Purpose</h2>
+      <p class="lead" style="margin:0">The purpose of 'Vikas Bhi, Virasat Bhi' is to promote an inclusive vision of
+        nation-building, where rapid economic and infrastructural development is harmonized with the conservation of
+        India’s centuries-old heritage—be it monuments, traditions, languages, art, or indigenous knowledge systems.
+        This approach ensures that as India moves forward on the path of modernization, it does not lose sight of its
+        cultural identity, legacy, and the historical values that define its soul.</p>
+    </section>
+
+    <!-- Small gallery preview — snapshots with explicit modal metadata -->
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin:0 0 8px">Snapshots</h3>
+      <p class="lead" style="margin:0 0 12px">Click images (on the gallery page) to view details and descriptions.</p>
+      <div class="snapshots" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+        <img src="https://borgenproject.org/wp-content/uploads/Traditional-Art-in-India.jpg" alt="Traditional Craft">
+        <img src="https://i.pinimg.com/originals/82/5b/70/825b70c258cb97845a08c6bd9898cade.jpg" alt="Modern Skyline ">
+        <img
+          src="https://img.freepik.com/premium-photo/traditional-dance-performance-showcasing-rich-cultural-diversity-india-expressing-joy_890802-1424.jpg?w=1060"
+          alt="Cultural Performance">
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal used by gallery (hidden on home, shared across pages) -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Image preview">
+    <div class="inner card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="modalTitle">Title</h3>
+        <button id="modalClose" class="btn" style="background:transparent;color:var(--muted)">Close</button>
+      </div>
+      <div style="margin-top:12px">
+        <img id="modalImg" src="" alt="" style="width:100%;height:420px;object-fit:cover;border-radius:10px">
+        <p id="modalDesc" style="color:var(--muted);margin-top:8px"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Professional footer -->
+  <footer>
+    &copy; 2025 Indraprastha International School — All Rights Reserved
+    <div style="margin-top:8px;font-size:12px;color:var(--muted)">Download current page: <button id="downloadSource"
+        class="btn btn-heritage" style="padding:6px 10px">Download</button></div>
+
+  </footer>
+</body>
+
+</html>

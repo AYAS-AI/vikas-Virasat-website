@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Virasat — Heritage Gallery</title>
+  <link rel="icon" type="image/png" href="assets/images/inpng.png">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Themed select + details caret styling-->
+  <style>
+    /* Themed select dropdown*/
+    select[name="interest"] {
+      background-color: var(--card);
+      color: #e6f2fb;
+      border: 1px solid rgba(159, 176, 193, 0.14);
+      border-radius: 6px;
+      padding: 10px 36px 10px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="%23f6a15c"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 14px;
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    select[name="interest"]:hover {
+      border-color: rgba(246, 161, 92, 0.36);
+      box-shadow: 0 0 6px rgba(246, 161, 92, 0.08);
+    }
+
+    select[name="interest"]:focus {
+      outline: none;
+      border-color: rgba(246, 161, 92, 0.8);
+      box-shadow: 0 0 10px rgba(246, 161, 92, 0.12);
+    }
+
+    /* Make form select full-width on small screens */
+    form select {
+      width: 100%;
+    }
+
+    /* Details summary / caret styling (script will inject .vb-caret) */
+    .timeline-extra summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 600;
+      color: var(--accent-heritage);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* hide native marker on webkit */
+    .timeline-extra summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* injected caret */
+    .vb-caret {
+      display: inline-block;
+      transition: transform 0.22s ease;
+      transform: rotate(0deg);
+      color: var(--accent-heritage);
+      margin-right: 6px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    /* CSS fallback animation*/
+    details.timeline-extra[open]>div {
+      animation: vb_fadeSlide 0.36s ease forwards;
+    }
+
+    @keyframes vb_fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <img src="assets/images/inpng.png" width="35px" height="35px" alt="India Flag" />
+      </div>
+      <div>
+        <div style="font-weight: 800">Vikas Bhi, Virasat Bhi</div>
+        <div style="font-size: 12px; color: var(--muted)">
+          Heritage Gallery
+        </div>
+      </div>
+    </div>
+    <nav aria-label="Main navigation">
+      <a href="index.html" data-transition>Home</a>
+      <a href="heritage.html" data-transition>Virasat</a>
+      <a href="vikas.html" data-transition>Vikas</a>
+      <a href="harmony.html" data-transition>Harmony</a>
+      <a href="involve.html" data-transition>Get Involved</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" style="margin: 0 0 8px">
+        Virasat — Interactive Gallery
+      </h2>
+      <p class="lead">
+        Click any image to open details. Each image includes a short
+        historical note.
+      </p>
+
+      <div class="gallery" style="margin-top: 14px">
+        <img data-anim="gallery-img" data-tilt="true"
+          src="https://tse2.mm.bing.net/th/id/OIP.ee0PMBVXEX-rehYvB-BZcgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Qutub Minar" data-title="Qutub Minar"
+          data-desc="Built in 1193 — an iconic Indo-Islamic structure rising in Delhi." />
+        <img data-anim="gallery-img" data-tilt="true"
+          src="https://images.assettype.com/indynetwork/2020-04/7fae3b36-b34d-4420-be8b-83822eeb21c1/Konark_Sun_Temple___Front_Elevation.jpg?w=1170"
+          alt="Sun Temple" data-title="Sun Temple"
+          data-desc="A 12th century temple renowned for its intricate stone carvings." />
+        <img data-anim="gallery-img" data-tilt="true" src="https://wallpapercave.com/wp/wp6679094.jpg" alt="Rath Yatra"
+          data-title="Rath Yatra" data-desc="A living procession that keeps community traditions alive." />
+        <img data-anim="gallery-img" data-tilt="true"
+          src="https://static.fibre2fashion.com/articleresources/images/98/9737/big_Handloom%20saree%20weaving%20india_Big.jpg"
+          alt="Handloom" data-title="Handloom"
+          data-desc="Regional weaving practices that carry centuries of knowledge." />
+        <img data-anim="gallery-img" data-tilt="true" src="https://wallpaperaccess.com/full/1315407.jpg"
+          alt="Classical Dance" data-title="Classical Dance"
+          data-desc="Performance arts passed down through teacher-student lineages." />
+        <img data-anim="gallery-img" data-tilt="true"
+          src="https://www.tripsavvy.com/thmb/LHJXVkYNzRdpcyn4QryPjnsQxoM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-134642772-591a84865f9b58f4c03a7f2e.jpg"
+          alt="Temple Rituals" data-title="Temple Rituals"
+          data-desc="Ceremonies and rituals that structure daily communal life." />
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 16px">
+      <h3 style="margin: 0 0 8px">Curation Notes</h3>
+      <p class="lead" style="margin: 0 0 12px"></p>
+
+      <p style="margin-top: 12px; color: var(--muted)">
+        This gallery focuses on three themes:
+        <strong>monuments</strong> (tangible heritage),
+        <strong>crafts</strong> (intangible heritage), and
+        <strong>ritual & performance</strong> (living traditions).
+      </p>
+    </section>
+
+    <!--Timeline -->
+    <section class="card" style="margin-top: 18px" aria-labelledby="timeline-heading">
+      <h3 id="timeline-heading" style="margin: 0 0 8px">
+        Heritage Trail — Interactive Timeline
+      </h3>
+      <p class="lead" style="margin: 0 0 12px">
+        Scroll through the timeline to see key moments in heritage
+        conservation and living traditions.
+      </p>
+
+      <!--legend-->
+      <div class="timeline-legend" style="display: flex; gap: 12px; align-items: center; margin-top: 8px">
+        <div style="display: flex; gap: 8px; align-items: center">
+          <!-- SVG icon-->
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 2L3 7v2h18V7l-9-5zM5 20h14v-2H5v2z" />
+          </svg>
+          <span style="font-size: 13px; color: var(--muted)">Monuments</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5" />
+          </svg>
+          <span style="font-size: 13px; color: var(--muted)">Craft &
+            Guilds</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor"
+              d="M12 2c-2 0-4 1-4 3s2 3 4 3 4-1 4-3-2-3-4-3zM6 14c0-3 6-4 6-4s6 1 6 4v4H6v-4z" />
+          </svg>
+          <span style="font-size: 13px; color: var(--muted)">Living
+            Traditions</span>
+        </div>
+      </div>
+
+      <div class="progress-wrap" style="margin-top: 12px">
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <div class="timeline" style="margin-top: 14px">
+        <div class="timeline-item" data-anim="timeline-item" data-direction="left">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="timeline-card">
+            <strong>c. 1200 CE — Foundational Monuments</strong>
+            <p style="margin: 6px 0 0; color: var(--muted)">
+              Major stone structures constructed, marking the emergence of
+              city-scale architecture.
+            </p>
+
+            <!-- expandable extra details -->
+            <details class="timeline-extra" style="margin-top: 8px">
+              <summary style="cursor: pointer; color: var(--muted); font-size: 13px">
+                Read more
+              </summary>
+              <div style="margin-top: 8px; color: var(--muted)">
+                These early monuments served religious, political and social
+                roles — their construction advanced local stone-working
+                techniques and urban planning. Many still inform local
+                identities today.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-anim="timeline-item" data-direction="right">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="timeline-card">
+            <strong>16th–18th c. — Craft Guilds & Trade</strong>
+            <p style="margin: 6px 0 0; color: var(--muted)">
+              Local guilds formalize craft techniques; textiles and metalwork
+              gain distinct regional signatures.
+            </p>
+
+            <details class="timeline-extra" style="margin-top: 8px">
+              <summary style="cursor: pointer; color: var(--muted); font-size: 13px">
+                Read more
+              </summary>
+              <div style="margin-top: 8px; color: var(--muted)">
+                Guild records show apprenticeship cycles and regional
+                specialisations — knowledge that survives today in village
+                looms and artisan households.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-anim="timeline-item" data-direction="left">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="timeline-card">
+            <strong>20th c. — Modern Preservation Movement</strong>
+            <p style="margin: 6px 0 0; color: var(--muted)">
+              Formal conservation principles and documentation begin; museums
+              and archives expand.
+            </p>
+
+            <details class="timeline-extra" style="margin-top: 8px">
+              <summary style="cursor: pointer; color: var(--muted); font-size: 13px">
+                Read more
+              </summary>
+              <div style="margin-top: 8px; color: var(--muted)">
+                This era introduced legislation, conservation training
+                institutes and cataloguing methods that professionalised
+                heritage work across the country.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-anim="timeline-item" data-direction="right">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="timeline-card">
+            <strong>21st c. — Community-Led Revival</strong>
+            <p style="margin: 6px 0 0; color: var(--muted)">
+              Grassroots initiatives reconnect youth with local art forms;
+              technology aids documentation.
+            </p>
+
+            <details class="timeline-extra" style="margin-top: 8px">
+              <summary style="cursor: pointer; color: var(--muted); font-size: 13px">
+                Read more
+              </summary>
+              <div style="margin-top: 8px; color: var(--muted)">
+                Community festivals, school programs and digital outreach have
+                helped revive several near-forgotten crafts and rituals in
+                recent years.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Conservation Flip cards-->
+    <section class="card" style="margin-top: 18px" aria-labelledby="conservation-heading">
+      <h3 id="conservation-heading" style="margin: 0 0 8px">
+        Conservation Spotlight
+      </h3>
+      <p class="lead" style="margin: 0 0 12px">
+        Short highlights of practical conservation projects and opportunities
+        to help.
+      </p>
+
+      <div class="flip-grid" style="margin-top: 14px">
+        <!-- Card 1 -->
+        <div class="flip-card" data-anim="flip-card">
+          <div class="flip-inner">
+            <div class="front card" style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: flex-start;
+                ">
+              <h4 style="margin: 0 0 8px">Restoration Workshops</h4>
+              <p style="margin: 0; color: var(--muted)">
+                Hands-on training for masonry, carving and surface
+                conservation.
+              </p>
+            </div>
+            <div class="back card" style="padding: 18px">
+              <h4 style="margin: 0 0 8px">Get Involved</h4>
+              <p style="margin: 0 0 8px; color: var(--muted)">
+                Volunteer for supervised weekend workshops. Short-term
+                training for students available.
+              </p>
+              <!-- <button class="btn btn-heritage ripple" style="margin-top:10px" data-action="workshop">Express
+                interest</button> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flip-card" data-anim="flip-card">
+          <div class="flip-inner">
+            <div class="front card" style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: flex-start;
+                ">
+              <h4 style="margin: 0 0 8px">Digital Archives</h4>
+              <p style="margin: 0; color: var(--muted)">
+                High-resolution capture of manuscripts, textiles & oral
+                histories.
+              </p>
+            </div>
+            <div class="back card" style="padding: 18px">
+              <h4 style="margin: 0 0 8px">How it helps</h4>
+              <p style="margin: 0 0 8px; color: var(--muted)">
+                Archiving prevents loss and enables accessible research for
+                students and scholars.
+              </p>
+              <!-- <button class="btn btn-dev ripple" style="margin-top:10px" data-action="archive">Learn more</button> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flip-card" data-anim="flip-card">
+          <div class="flip-inner">
+            <div class="front card" style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: flex-start;
+                ">
+              <h4 style="margin: 0 0 8px">Living Traditions</h4>
+              <p style="margin: 0; color: var(--muted)">
+                Support for festivals, apprenticeships and performance
+                documentation.
+              </p>
+            </div>
+            <div class="back card" style="padding: 18px">
+              <h4 style="margin: 0 0 8px">Why it matters</h4>
+              <p style="margin: 0 0 8px; color: var(--muted)">
+                Sustains community identity and provides livelihoods for
+                practitioners.
+              </p>
+              <!-- <button class="btn btn-heritage ripple" style="margin-top:10px"
+                data-action="traditions">Volunteer</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Case study-->
+    <section class="card" style="margin-top: 18px" aria-labelledby="case-heading">
+      <h3 id="case-heading" style="margin: 0 0 8px">
+        Case Study — The Riverfront Revival
+      </h3>
+      <p class="lead" style="margin: 0 0 12px">
+        A short project narrative that demonstrates how heritage and
+        development can be balanced.
+      </p>
+
+      <article style="color: var(--muted); margin-top: 12px; line-height: 1.6">
+        <p>
+          <strong>Overview:</strong> A riverbank neighbourhood was revitalised
+          through careful restoration of historic warehouses, adaptive reuse
+          into artisan workshops, and a low-impact riverside promenade. The
+          project prioritised local skills and small-scale infrastructure that
+          supports both tourism and daily life.
+        </p>
+
+        <p>
+          <strong>Approach:</strong> The project followed three principles:
+          retain original fabric where possible, document and teach
+          traditional craft skills, and introduce lightweight new design that
+          is reversible. Students and local youth were engaged in
+          documentation and community programming.
+        </p>
+
+        <p>
+          <strong>Outcomes:</strong> Increased employment for local artisans,
+          a micro-economy of craft tourism, and restored public spaces that
+          are resilient to seasonal flooding. Most importantly, cultural
+          practices regained visibility and intergenerational transmission was
+          renewed.
+        </p>
+      </article>
+    </section>
+
+    <!-- NEW: Get Involved — Volunteer Form -->
+    <section class="card" style="margin-top: 18px" aria-labelledby="involve-heading">
+      <h3 id="involve-heading" style="margin: 0 0 8px">Get Involved</h3>
+      <p class="lead" style="margin: 0 0 12px">
+        Join a workshop, nominate a local site, or propose a small project
+        idea.
+      </p>
+
+      <form style="margin-top: 12px; display: grid; gap: 12px; max-width: 680px">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Email (for follow-up)" required />
+        <select name="interest" aria-label="Interest area">
+          <option value>Select interest area (optional)</option>
+          <option value="restoration">Restoration workshops</option>
+          <option value="archives">Digital archiving</option>
+          <option value="performance">Living traditions & performance</option>
+          <option value="research">Research & documentation</option>
+        </select>
+        <textarea name="message" rows="4" placeholder="Brief idea or area you'd like to help with" required></textarea>
+        <div class="form-actions" style="align-items: center">
+          <button class="btn btn-heritage" type="submit">Send — Demo</button>
+          <div id="formMsg" style="color: var(--muted); font-size: 14px; margin-left: 8px"></div>
+        </div>
+      </form>
+    </section>
+
+    <!-- NEW: Preserve the Future CTA (added, non-destructive) -->
+    <section class="card" style="margin-top: 18px">
+      <h3 style="margin: 0 0 8px">Preserve the Future</h3>
+      <p class="lead" style="margin: 0 0 12px">
+        If you appreciated these stories, join the movement to preserve and
+        adapt heritage responsibly.
+      </p>
+      <div style="
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+          ">
+        <a class="btn btn-heritage" href="involve.html" data-transition>Join a
+          Workshop</a>
+        <a class="btn btn-dev" href="involve.html#volunteer" data-transition>Volunteer</a>
+        <a class="btn" href="mailto:crypticon@mapsashokvihar.net">Contact</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Indraprastha International School — Designed & Developed by
+    Reyansh Beniwal and Ayaskant Sahoo
+    <div style="margin-top: 8px; font-size: 12px; color: var(--muted)">
+      Download current page:
+      <button id="downloadSource" class="btn btn-heritage" style="padding: 6px 10px">
+        Download
+      </button>
+    </div>
+  </footer>
+
+  <!-- shared modal -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Image preview">
+    <div class="inner card">
+      <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          ">
+        <h3 id="modalTitle">Title</h3>
+        <button id="modalClose" class="btn" style="background: transparent; color: var(--muted)">
+          Close
+        </button>
+      </div>
+      <div style="margin-top: 12px">
+        <img id="modalImg" src alt style="
+              width: 100%;
+              height: 420px;
+              object-fit: cover;
+              border-radius: 10px;
+            " />
+        <p id="modalDesc" style="color: var(--muted); margin-top: 8px"></p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

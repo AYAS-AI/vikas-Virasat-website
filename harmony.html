@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Harmony — Case Studies</title>
+  <link rel="icon" type="image/png" href="assets/images/inpng.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    /* keep existing local tweak */
+    .parallax {
+      background-image: linear-gradient(180deg, rgba(2, 10, 20, 0.6), rgba(2, 10, 20, 0.7)), url('https://images.unsplash.com/photo-1491557345352-5929e343eb89?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=parallax');
+      background-size: cover;
+      background-attachment: fixed;
+      padding: 40px;
+      border-radius: 12px;
+    }
+
+    /* NEW: compact timeline/steps (unique classes so it doesn't interfere with the site's main .timeline JS) */
+    .harmony-steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px
+    }
+
+    .h-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start
+    }
+
+    .h-step .icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(145deg, var(--panel), rgba(255, 255, 255, 0.04));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      color: var(--accent-heritage);
+    }
+
+    .h-step .card {
+      padding: 12px
+    }
+
+    .h-step details summary {
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+      list-style: none;
+    }
+
+    .h-step details summary::marker {
+      content: ""
+    }
+
+    .h-step details summary .caret {
+      display: inline-block;
+      transform: rotate(0deg);
+      transition: transform .25s ease;
+      margin-right: 6px
+    }
+
+    .h-step details[open] summary .caret {
+      transform: rotate(90deg)
+    }
+
+    .h-step details .more {
+      overflow: hidden
+    }
+
+    /* NEW: Before↔After slider (pure CSS + tiny inline oninput handler below) */
+
+    .ba {
+      --pos: 50;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      margin-top: 14px
+    }
+
+    .ba img {
+      display: block;
+      width: 100%;
+      height: 380px;
+      object-fit: cover
+    }
+
+    .ba .after {
+      position: absolute;
+      inset: 0;
+      clip-path: inset(0 calc(100% - var(--pos)*1%) 0 0)
+    }
+
+    .ba .label {
+      position: absolute;
+      top: 10px;
+      z-index: 2;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .ba .label.before {
+      left: 96%
+    }
+
+    .ba .label.after {
+      right: 10px
+    }
+
+    .ba .grab {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      pointer-events: none
+    }
+
+    .ba .bar {
+      position: absolute;
+      left: calc(var(--pos) * 1%);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, .55)
+    }
+
+    .ba .knob {
+      position: absolute;
+      left: calc(var(--pos) * 1% - 14px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .9);
+      display: grid;
+      place-items: center
+    }
+
+    .ba .knob svg {
+      opacity: .8
+    }
+
+    .ba input[type="range"] {
+      position: absolute;
+      inset: 0;
+      appearance: none;
+      background: transparent;
+      cursor: ew-resize;
+      z-index: 3
+    }
+
+    .ba input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: transparent;
+      border: none
+    }
+
+    .ba input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: transparent;
+      border: none
+    }
+
+    /* NEW: mini grid helpers */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px
+    }
+
+    @media (max-width: 760px) {
+      .grid-2 {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* NEW: subtle “badge row” */
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px
+    }
+
+    .badge {
+      font-size: 12px;
+      color: #dfe7f9;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: 6px 10px;
+      border-radius: 999px
+    }
+
+    /* NEW: stats layout (script.js will animate .impact-stats .num) */
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px
+    }
+
+    .impact-stats .stat {
+      padding: 16px;
+      text-align: center
+    }
+
+    .impact-stats .num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: .3px
+    }
+
+    .impact-stats .label {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    @media (max-width: 900px) {
+      .impact-stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width: 520px) {
+      .impact-stats {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><img src="assets/images/inpng.png" width="35px" height="35px"
+          alt="India Flag"></div>
+      <div>
+        <div style="font-weight:800">Vikas Bhi, Virasat Bhi</div>
+        <div style="font-size:12px;color:var(--muted)">Harmony Case Studies</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html" data-transition>Home</a>
+      <a href="heritage.html" data-transition>Virasat</a>
+      <a href="vikas.html" data-transition>Vikas</a>
+      <a href="harmony.html" data-transition>Harmony</a>
+      <a href="involve.html" data-transition>Get Involved</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- ORIGINAL SECTION (unchanged) -->
+    <section class="card parallax">
+      <h2 style="margin:0 0 8px">Harmony — Development that Respects Heritage</h2>
+      <p class="lead" style="margin:0 0 12px">Examples of projects that blend modern utility with cultural protection.
+      </p>
+      <div class="flip-grid" style="margin-top:14px">
+        <div class="flip-card card">
+          <div class="flip-inner">
+            <div class="front">
+              <h3>Digital Museums</h3>
+              <p class="lead">3D scans, virtual tours for global access.</p>
+            </div>
+            <div class="back">
+              <p>Institutions digitize collections to reduce handling and open archives to education worldwide.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card card">
+          <div class="flip-inner">
+            <div class="front">
+              <h3>Heritage-friendly Transit</h3>
+              <p class="lead">Transit plans that protect monuments & lanes.</p>
+            </div>
+            <div class="back">
+              <p>Urban layouts that keep conservation zones intact while improving mobility and local economies.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card card">
+          <div class="flip-inner">
+            <div class="front">
+              <h3>Community Tourism</h3>
+              <p class="lead">Local economy + tradition preservation.</p>
+            </div>
+            <div class="back">
+              <p>Sustainable tourism that provides income while funding conservation and cultural education.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- small badge row for flavor -->
+      <div class="badges">
+        <span class="badge">Open Data</span>
+        <span class="badge">Low-Impact Design</span>
+        <span class="badge">Apprenticeships</span>
+        <span class="badge">Local Materials</span>
+      </div>
+    </section>
+
+    <!-- NEW: Step-by-step Harmony Playbook (independent from main .timeline JS) -->
+    <section class="card" aria-labelledby="playbook-heading" style="margin-top:16px">
+      <h3 id="playbook-heading" style="margin:0 0 8px">Harmony Playbook — Steps that Work</h3>
+      <p class="lead" style="margin:0 0 12px">A field-tested flow that projects use to balance growth with culture.</p>
+
+      <div class="harmony-steps">
+        <div class="h-step">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M3 4h18v2H3V4zm2 4h14v2H5V8zm-2 4h18v2H3v-2zm2 4h7v2H5v-2z" />
+            </svg>
+          </div>
+          <div class="card">
+            <strong>1) Document</strong>
+            <p class="lead" style="margin:6px 0 0">Scan, map and interview—start with knowledge.</p>
+            <details>
+              <summary><span class="caret">▸</span>Read more</summary>
+              <div class="more" style="margin-top:8px;color:var(--muted)">Use 3D scans for fragile artifacts, collect
+                oral histories, and geo-tag assets so planners have the same baseline.</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="h-step">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2 2 7l10 5 10-5-10-5Zm0 7L2 4v13l10 5 10-5V4l-10 5Z" />
+            </svg>
+          </div>
+          <div class="card">
+            <strong>2) Co-Design</strong>
+            <p class="lead" style="margin:6px 0 0">Workshops with residents, artisans & students.</p>
+            <details>
+              <summary><span class="caret">▸</span>Read more</summary>
+              <div class="more" style="margin-top:8px;color:var(--muted)">Prototype streetscapes, signage and exhibits
+                with end users. Co-design reduces conflict and unlocks local craft.</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="h-step">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M5 20h14v-2H5v2ZM7 4h2v10H7V4Zm4 4h2v6h-2V8Zm4-3h2v9h-2V5Z" />
+            </svg>
+          </div>
+          <div class="card">
+            <strong>3) Lightweight Build</strong>
+            <p class="lead" style="margin:6px 0 0">Reversible interventions, minimum new footprint.</p>
+            <details>
+              <summary><span class="caret">▸</span>Read more</summary>
+              <div class="more" style="margin-top:8px;color:var(--muted)">Use modular decks, tension structures and
+                removable fixtures—preserve original fabric while adding utility.</div>
+            </details>
+          </div>
+        </div>
+
+        <div class="h-step">
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="m12 17-4 2 1-4-3-3 4-.5L12 7l2 4.5 4 .5-3 3 1 4-4-2Z" />
+            </svg>
+          </div>
+          <div class="card">
+            <strong>4) Share & Sustain</strong>
+            <p class="lead" style="margin:6px 0 0">Open data, training, and micro-economies.</p>
+            <details>
+              <summary><span class="caret">▸</span>Read more</summary>
+              <div class="more" style="margin-top:8px;color:var(--muted)">Publish datasets, fund apprenticeships, and
+                support guild-led tourism so benefits remain with the community.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Before/After slider (pure CSS + input range) -->
+    <section class="card" aria-labelledby="ba-heading" style="margin-top:16px">
+      <h3 id="ba-heading" style="margin:0 0 8px">Before ↔ After — Sensitive Restoration</h3>
+      <p class="lead" style="margin:0 0 12px">Drag the handle to compare pre-restoration and post-restoration views.</p>
+
+      <div class="ba" style="--pos:50">
+        <span class="label before">After</span>
+        <span class="label after">Before</span>
+
+        <img
+          src="https://keepcalmandcurryon.wordpress.com/wp-content/uploads/2013/02/interior-with-jali-after.jpg?w=538"
+          alt="Historic facade before restoration">
+        <div class="after">
+          <img
+            src="https://keepcalmandcurryon.wordpress.com/wp-content/uploads/2013/02/interior-with-jali-before.jpg?w=538"
+            alt="Facade after sensitive restoration">
+        </div>
+
+        <div class="grab" aria-hidden="true">
+          <div class="bar"></div>
+          <div class="knob">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path fill="#0a2540" d="M8 12l5-5v10z" />
+            </svg>
+          </div>
+        </div>
+
+        <input type="range" value="50" min="0" max="100" aria-label="Compare images"
+          oninput="this.parentElement.style.setProperty('--pos', this.value)">
+      </div>
+    </section>
+
+    <!-- NEW: impact counters (script.js animates .impact-stats .num on scroll) -->
+    <section class="card" aria-labelledby="impact-heading" style="margin-top:16px">
+      <h3 id="impact-heading" style="margin:0 0 8px">Impact at a Glance</h3>
+      <p class="lead" style="margin:0 0 12px">Measured outcomes from harmony-first projects.</p>
+
+      <div class="impact-stats">
+        <div class="stat card">
+          <div class="num" data-target="120">0</div>
+          <div class="label">Sites documented</div>
+        </div>
+        <div class="stat card">
+          <div class="num" data-target="48">0</div>
+          <div class="label">Restorations completed</div>
+        </div>
+        <div class="stat card">
+          <div class="num" data-target="3500">0</div>
+          <div class="label">Artisans supported</div>
+        </div>
+        <div class="stat card">
+          <div class="num" data-target="92">0</div>
+          <div class="label">Student projects</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: quick “duo” cards with imagery for variety -->
+    <section class="card" aria-labelledby="duo-heading" style="margin-top:16px">
+      <h3 id="duo-heading" style="margin:0 0 8px">Two Quick Examples</h3>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="card">
+          <img src="assets\images\ex.jpg" alt="Adaptive reuse interior"
+            style="width:100%;height:210px;object-fit:cover;border-radius:8px">
+          <p class="lead" style="margin:8px 0 0">Old mill → innovation lab with heritage signage preserved.</p>
+        </div>
+        <div class="card">
+          <img src="assets\images\ex01.jpg" alt="Craft market"
+            style="width:100%;height:210px;object-fit:cover;border-radius:8px">
+          <p class="lead" style="margin:8px 0 0">Festival route redesigned to include craft stalls & safety nodes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- gentle CTA that reuses your buttons -->
+    <section class="card" style="margin-top:16px">
+      <h3 style="margin:0 0 8px">Build Your Own Harmony Pilot</h3>
+      <p class="lead" style="margin:0 0 12px">Start small: document one lane, co-design one corner, and share your
+        results.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-heritage" href="involve.html#volunteer" data-transition>Join a field survey</a>
+        <a class="btn btn-dev" href="vikas.html#gallery" data-transition>See modern prototypes</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Indraprastha International School — Designed & Developed by Reyansh Beniwal and Ayaskant Sahoo
+    <div style="margin-top:8px;font-size:12px;color:var(--muted)">Download current page: <button id="downloadSource"
+        class="btn btn-heritage" style="padding:6px 10px">Download</button></div>
+  </footer>
+</body>
+
+</html>

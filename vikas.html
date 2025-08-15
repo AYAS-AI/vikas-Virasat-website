@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vikas — Timeline</title>
+  <link rel="icon" type="image/png" href="assets/images/inpng.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><img src="assets/images/inpng.png" width="35px" height="35px"
+          alt="India Flag"></div>
+      <div>
+        <div style="font-weight:800">Vikas Bhi, Virasat Bhi</div>
+        <div style="font-size:12px;color:var(--muted)">Development Timeline</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html" data-transition>Home</a>
+      <a href="heritage.html" data-transition>Virasat</a>
+      <a href="vikas.html" data-transition>Vikas</a>
+      <a href="harmony.html" data-transition>Harmony</a>
+      <a href="involve.html" data-transition>Get Involved</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 style="margin:0 0 8px">Vikas — Timeline of Progress</h2>
+      <p class="lead">Scroll down to view milestones; progress bar indicates how much you've read.</p>
+      <div class="timeline" style="margin-top:16px">
+        <div class="timeline-item">
+          <div class="dot" style="background:var(--accent-heritage)"></div>
+          <div class="timeline-card"><strong>1947</strong> — Independence; nation-building starts.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-card"><strong>1960s–1980s</strong> — Industrial infrastructure & public institutions.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-card"><strong>1991</strong> — Economic liberalization; private sector growth.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-card"><strong>2000s</strong> — IT boom; digital services expansion.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="timeline-card"><strong>2010s–Today</strong> — Infrastructure, space missions, sustainable
+            initiatives.</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap" aria-hidden="true">
+        <div class="progress"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h3 style="margin:0 0 8px">Highlights</h3>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+        <div class="card"><strong>Space & Science</strong>
+          <p class="lead" style="margin:6px 0 0">Satellite missions and scientific research.</p>
+        </div>
+        <div class="card"><strong>Smart Cities</strong>
+          <p class="lead" style="margin:6px 0 0">Modern urban planning with heritage zones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision for the Future -->
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin:0 0 8px">Vision for the Future</h3>
+      <p class="lead" style="margin:0 0 12px">Where we aim to be in the next decades.</p>
+      <div class="flip-grid" style="margin-top:14px">
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="front card">
+              <h4>2030</h4>
+              <p class="lead">100% renewable public transport in metro cities.</p>
+            </div>
+            <div class="back card">
+              <p style="color:var(--muted)">Green metros, solar bus depots, and EV-only zones for cleaner air.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="front card">
+              <h4>2040</h4>
+              <p class="lead">Smart agriculture across rural India.</p>
+            </div>
+            <div class="back card">
+              <p style="color:var(--muted)">IoT-driven irrigation, AI crop prediction, and zero-waste farming.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="front card">
+              <h4>2050</h4>
+              <p class="lead">Carbon-neutral nation status achieved.</p>
+            </div>
+            <div class="back card">
+              <p style="color:var(--muted)">Powered entirely by renewables with sustainable cities and villages.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini Case Study -->
+    <section class="card" style="margin-top:18px">
+      <h3>Case Study — Solar City Initiative</h3>
+      <p class="lead">Transforming mid-sized cities into self-sustaining solar hubs.</p>
+      <article style="color:var(--muted);margin-top:12px;line-height:1.6">
+        <p><strong>Overview:</strong> In 2023, the Solar City Initiative began converting public buildings to solar
+          power, slashing carbon emissions by 60% in 2 years.</p>
+        <p><strong>Approach:</strong> Public-private partnerships, rooftop solar adoption, and community solar gardens.
+        </p>
+        <p><strong>Impact:</strong> Lower energy costs, cleaner environment, and replicable models for other cities.</p>
+      </article>
+    </section>
+
+    <!-- Stats Counters -->
+    <section class="card" style="margin-top:18px">
+      <h3>Progress in Numbers</h3>
+      <div class="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px">
+        <div class="card"><strong class="counter" data-target="750">0</strong>
+          <p>Smart Cities in planning</p>
+        </div>
+        <div class="card"><strong class="counter" data-target="95">0</strong>
+          <p>% Renewable Energy Target by 2050</p>
+        </div>
+        <div class="card"><strong class="counter" data-target="1200">0</strong>
+          <p>Major Infrastructure Projects Completed</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Carousel -->
+
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin:0 0 8px">Gallery of Progress</h3>
+
+      <div class="progress-gallery">
+        <div class="carousel-track">
+          <img src="https://wallpapercave.com/wp/wp12086739.jpg" alt="Delhi Metro">
+          <img src="https://i0.wp.com/images.spaceref.com/news/2017/isro-launches-pslv-c37_021517_945.jpg"
+            alt="Rocket Launch">
+          <img
+            src="https://currentaffairs.adda247.com/wp-content/uploads/multisite/sites/5/2025/06/11124435/Bihar-CM-Inaugurates-2-MW-Canal-Side-Solar-Plant-in-Patna.jpg"
+            alt="Floating Solar">
+          <!-- Duplicate images for smooth loop -->
+          <img src="https://wallpapercave.com/wp/wp12086739.jpg" alt="Delhi Metro">
+          <img src="https://i0.wp.com/images.spaceref.com/news/2017/isro-launches-pslv-c37_021517_945.jpg"
+            alt="Rocket Launch">
+          <img
+            src="https://currentaffairs.adda247.com/wp-content/uploads/multisite/sites/5/2025/06/11124435/Bihar-CM-Inaugurates-2-MW-Canal-Side-Solar-Plant-in-Patna.jpg"
+            alt="Floating Solar">
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Banner -->
+    <section class="card" style="margin-top:18px;text-align:center">
+      <blockquote style="font-size:20px;font-weight:600;color:var(--muted)">"True development harmonizes technology with
+        tradition."</blockquote>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Indraprastha International School — Designed & Developed by Reyansh Beniwal and Ayaskant Sahoo
+    <div style="margin-top:8px;font-size:12px;color:var(--muted)">Download current page: <button id="downloadSource"
+        class="btn btn-heritage" style="padding:6px 10px">Download</button></div>
+  </footer>
+</body>
+
+</html>
