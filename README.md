@@ -1,4 +1,4 @@
-# Vikas Bhi, Virasat Bhi — Website
+# Vikas Bhi, Virasat Bhi | Website
 
 A responsive, GSAP-powered website showcasing how development and heritage can coexist in harmony.  
 Created for **CRYPTICON 2025 (AURA 2025)**.
