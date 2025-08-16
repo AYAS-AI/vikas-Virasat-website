@@ -42,7 +42,10 @@
       <h2 style="margin:0 0 8px">Get Involved</h2>
       <p class="lead">Share an idea that supports heritage while enabling sustainable development.</p>
 
-      <form id="ideaForm" style="margin-top:12px">
+      <!--Netlify form -->
+      <form id="ideaForm" name="ideaForm" method="POST" data-netlify="true" style="margin-top:12px">
+        <input type="hidden" name="form-name" value="ideaForm">
+
         <input name="name" placeholder="Your name" required>
         <input name="school" placeholder="School / Team (optional)">
         <textarea name="idea" placeholder="Your idea (concise)" required
@@ -52,6 +55,7 @@
           <button type="submit" class="btn btn-dev ripple">Send idea</button>
         </div>
 
+        <!--Message placeholder-->
         <div id="formMsg" style="color:var(--muted);font-size:13px;margin-top:8px"></div>
       </form>
     </section>
@@ -59,9 +63,10 @@
 
   <footer>
     &copy; 2025 Indraprastha International School — Designed & Developed by Reyansh Beniwal and Ayaskant Sahoo
-    <div style="margin-top:8px;font-size:12px;color:var(--muted)">Download current page: <button id="downloadSource"
-        class="btn btn-heritage" style="padding:6px 10px">Download</button></div>
-
+    <div style="margin-top:8px;font-size:12px;color:var(--muted)">
+      Download current page:
+      <button id="downloadSource" class="btn btn-heritage" style="padding:6px 10px">Download</button>
+    </div>
   </footer>
 
 </body>

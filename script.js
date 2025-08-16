@@ -615,7 +615,7 @@
         const nm = nmField ? nmField.value || "Participant" : "Participant";
         const msgEl = f.querySelector("#formMsg");
         if (msgEl)
-          msgEl.textContent = `Thanks, ${nm}. Your idea has been recorded (demo).`;
+          msgEl.textContent = `Thanks, ${nm}. Your idea has been recorded. 💡`;
         if (window.gsap)
           gsap.fromTo(
             f,

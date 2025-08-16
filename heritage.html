@@ -129,10 +129,8 @@
       </p>
 
       <div class="gallery" style="margin-top: 14px">
-        <img data-anim="gallery-img" data-tilt="true"
-          src="https://wallpapercave.com/wp/wp3917475.jpg"
-          alt="Qutub Minar" data-title="Qutub Minar"
-          data-desc="Built in 1193 — an iconic Indo-Islamic structure rising in Delhi." />
+        <img data-anim="gallery-img" data-tilt="true" src="https://wallpapercave.com/wp/wp3917475.jpg" alt="Qutub Minar"
+          data-title="Qutub Minar" data-desc="Built in 1193 — an iconic Indo-Islamic structure rising in Delhi." />
         <img data-anim="gallery-img" data-tilt="true"
           src="https://images.assettype.com/indynetwork/2020-04/7fae3b36-b34d-4420-be8b-83822eeb21c1/Konark_Sun_Temple___Front_Elevation.jpg?w=1170"
           alt="Sun Temple" data-title="Sun Temple"
@@ -436,9 +434,13 @@
         idea.
       </p>
 
-      <form style="margin-top: 12px; display: grid; gap: 12px; max-width: 680px">
+      <form id="heritageForm" name="heritageForm" method="POST" data-netlify="true"
+        style="margin-top: 12px; display: grid; gap: 12px; max-width: 680px">
+        <input type="hidden" name="form-name" value="heritageForm">
+
         <input type="text" name="name" placeholder="Your name" required />
         <input type="email" name="email" placeholder="Email (for follow-up)" required />
+
         <select name="interest" aria-label="Interest area">
           <option value>Select interest area (optional)</option>
           <option value="restoration">Restoration workshops</option>
@@ -446,9 +448,11 @@
           <option value="performance">Living traditions & performance</option>
           <option value="research">Research & documentation</option>
         </select>
+
         <textarea name="message" rows="4" placeholder="Brief idea or area you'd like to help with" required></textarea>
+
         <div class="form-actions" style="align-items: center">
-          <button class="btn btn-heritage" type="submit">Send — Demo</button>
+          <button class="btn btn-heritage" type="submit">Send</button>
           <div id="formMsg" style="color: var(--muted); font-size: 14px; margin-left: 8px"></div>
         </div>
       </form>
