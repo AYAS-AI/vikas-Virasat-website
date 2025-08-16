@@ -111,7 +111,6 @@
     );
 
     // Ignore reduced-motion during debug phase
-    
 
     if (
       window.matchMedia &&
@@ -1499,6 +1498,59 @@
     // Pause on hover
     gallery.addEventListener("mouseenter", () => gsap.globalTimeline.pause());
     gallery.addEventListener("mouseleave", () => gsap.globalTimeline.resume());
+  });
+
+  // Mobile nav toggle with GSAP animation
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector("header nav");
+
+    if (toggle && nav) {
+      let isOpen = false;
+
+      // Only control with GSAP on mobile
+      const mq = window.matchMedia("(max-width: 760px)");
+
+      const setup = () => {
+        if (mq.matches) {
+          // Mobile: start collapsed
+          gsap.set(nav, { height: 0, opacity: 0, display: "none" });
+          isOpen = false;
+        } else {
+          // Desktop: reset nav to normal
+          gsap.set(nav, { clearProps: "all" }); // removes GSAP inline styles
+          nav.style.display = "flex";
+        }
+      };
+
+      // Run on load + whenever viewport changes
+      setup();
+      mq.addEventListener("change", setup);
+
+      toggle.addEventListener("click", () => {
+        if (!mq.matches) return; // Ignore clicks on desktop
+
+        if (isOpen) {
+          // Animate close
+          gsap.to(nav, {
+            height: 0,
+            opacity: 0,
+            duration: 0.35,
+            ease: "power2.inOut",
+            onComplete: () => (nav.style.display = "none"),
+          });
+        } else {
+          // Animate open
+          nav.style.display = "flex";
+          gsap.fromTo(
+            nav,
+            { height: 0, opacity: 0 },
+            { height: "auto", opacity: 1, duration: 0.35, ease: "power2.inOut" }
+          );
+        }
+        isOpen = !isOpen;
+      });
+    }
   });
 
   // run extras shortly after DOM ready (gives boot() time to run first)

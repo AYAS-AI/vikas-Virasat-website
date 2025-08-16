@@ -546,3 +546,190 @@ footer {
   object-fit: cover;
   border-radius: 8px;
 }
+
+/* =========================================
+   RESPONSIVE FIXES (mobile & tablet)
+   ========================================= */
+
+/* Header & nav */
+header {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+nav a {
+  font-size: 14px;
+  padding: 6px 8px;
+}
+
+/* Containers */
+.container {
+  padding: 12px;
+}
+
+/* Flip card grids (Heritage, Harmony, etc.) */
+.flip-grid,
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Before/After slider (Vikas page) */
+.ba img {
+  height: auto;
+  max-height: 260px;
+  object-fit: cover;
+}
+
+/* Impact stats collapse */
+@media (max-width: 900px) {
+  .impact-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+@media (max-width: 520px) {
+  .impact-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Snapshots gallery (Home) */
+.snapshots {
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 520px) {
+  .snapshots {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Forms (Heritage & Involve pages) */
+form input,
+form textarea,
+form select,
+form button {
+  width: 100%;
+  font-size: 15px;
+}
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch !important;
+  gap: 8px;
+}
+
+/* Cards & sections */
+.card {
+  padding: 14px;
+}
+
+/* Footer text smaller on mobile */
+footer {
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ============================
+   Mobile nav toggle (hamburger)
+   ============================ */
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--accent, #fff);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Default: nav visible on desktop */
+nav {
+  display: flex;
+  gap: 14px;
+}
+
+/* Mobile: hide nav until toggled */
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: block;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  nav.open {
+    display: flex;
+  }
+  nav a {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  nav a:last-child {
+    border-bottom: none;
+  }
+}
+
+/* 
+   Harmony Section
+   ====================== */
+
+/* Make .parallax behave like other cards */
+.parallax {
+  background-image: linear-gradient(
+      180deg,
+      rgba(2, 10, 20, 0.6),
+      rgba(2, 10, 20, 0.7)
+    ),
+    url("https://images.unsplash.com/photo-1491557345352-5929e343eb89?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=parallax");
+  background-size: cover;
+  background-attachment: fixed;
+  border-radius: 12px;
+
+  /* match section sizing */
+  width: 100%;
+  max-width: var(--maxwidth); /* consistent with .container */
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Flip-grid stays neat */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* Flip cards sizing */
+.flip-card {
+  perspective: 1000px;
+  min-height: 200px;
+}
+.flip-card .front,
+.flip-card .back {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Badges row cleanup */
+.badges {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
