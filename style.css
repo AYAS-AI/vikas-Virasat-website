@@ -81,11 +81,11 @@ header {
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--accent-heritage),
     var(--accent-dev)
-  );
+  ); */
   display: flex;
   align-items: center;
   justify-content: center;
